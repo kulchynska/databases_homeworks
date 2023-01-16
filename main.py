@@ -61,6 +61,19 @@ def insert_data():
                   {'user_id': 2, 'room_id': 1})
 
 
+def update_data():
+    with conn:
+        # update data for 'users'
+        update_users_sql = """UPDATE users SET first_name = ?, last_name = ? WHERE id = ?"""
+        users_data_1 = ("UpdatedAnna", "UpdatedKulchynska", 1)
+        c.execute(update_users_sql, users_data_1)
+
+        # update data for 'rooms'
+        update_rooms_sql = """UPDATE rooms SET room_name = ? WHERE id = ?"""
+        rooms_data_1 = ("UpdatedMirabella", 1)
+        c.execute(update_rooms_sql, rooms_data_1)
+
+
 def get_users():
     c.execute("SELECT * FROM users")
     return c.fetchall()
@@ -82,6 +95,12 @@ def get_users_to_rooms_join():
 
 
 insert_data()
+print(get_users())
+print(get_rooms())
+print(get_users_to_rooms_where_clause())
+print(get_users_to_rooms_join())
+update_data()
+print("After updating data")
 print(get_users())
 print(get_rooms())
 print(get_users_to_rooms_where_clause())
